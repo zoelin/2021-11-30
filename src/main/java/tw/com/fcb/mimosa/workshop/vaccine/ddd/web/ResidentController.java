@@ -2,7 +2,10 @@ package tw.com.fcb.mimosa.workshop.vaccine.ddd.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import tw.com.fcb.mimosa.workshop.vaccine.ddd.repository.ResidentEntity;
 import tw.com.fcb.mimosa.workshop.vaccine.ddd.service.ResidentService;
+
+import java.util.List;
 
 /**
  * 命令風格 API
@@ -18,7 +21,8 @@ class ResidentController {
    * 2021/11/30 homework
    */
   @PostMapping
-  void makeAppointment() {
+  long makeAppointment(@RequestBody MakeAppointment command) {
+    return service.makeAppointment(command);
   }
 
   @PutMapping("/{id}")
@@ -38,11 +42,11 @@ class ResidentController {
                      @RequestBody CancelVaccine command) {
     service.cancelVaccine(id, command);
   }
-
   /**
    * 2021/11/30 homework
    */
   @GetMapping
-  void getResidents() {
+  List<ResidentEntity> getResidents() {
+    return service.getResidents();
   }
 }
