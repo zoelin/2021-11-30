@@ -62,14 +62,7 @@ public class ResidentService {
 
   public long makeAppointment(MakeAppointment command) {
     var entity = mapper.toEntity(command);
-    long dbId = repository.save(entity).getId();
-    var db = repository.findById(dbId).orElseThrow();
-    var append = command.getChooses().stream()
-      .map(mapper::toChooseEntity)
-      .collect(Collectors.toList());
-    db.getChooses().addAll(append);
-     repository.save(db);
-     return dbId;
+     return repository.save(entity).getId();
   }
 
 
