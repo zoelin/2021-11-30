@@ -2,7 +2,6 @@ package tw.com.fcb.mimosa.workshop.vaccine.ddd.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import tw.com.fcb.mimosa.workshop.vaccine.ddd.repository.ResidentEntity;
 import tw.com.fcb.mimosa.workshop.vaccine.ddd.service.ResidentService;
 
 import java.util.List;
@@ -46,7 +45,7 @@ class ResidentController {
    * 2021/11/30 homework
    */
   @GetMapping
-  List<ResidentEntity> getResidents() {
+  List<ResidentProfile> getResidents() {
     return service.getResidents();
   }
 }

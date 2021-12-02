@@ -5,12 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 import tw.com.fcb.mimosa.workshop.vaccine.ddd.ResidentMapper;
 import tw.com.fcb.mimosa.workshop.vaccine.ddd.repository.ChooseEntity;
-import tw.com.fcb.mimosa.workshop.vaccine.ddd.repository.ResidentEntity;
 import tw.com.fcb.mimosa.workshop.vaccine.ddd.repository.ResidentRepository;
-import tw.com.fcb.mimosa.workshop.vaccine.ddd.web.CancelVaccine;
-import tw.com.fcb.mimosa.workshop.vaccine.ddd.web.ChooseVaccine;
-import tw.com.fcb.mimosa.workshop.vaccine.ddd.web.MakeAppointment;
-import tw.com.fcb.mimosa.workshop.vaccine.ddd.web.ReplaceResidentProfile;
+import tw.com.fcb.mimosa.workshop.vaccine.ddd.web.*;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -61,12 +57,10 @@ public class ResidentService {
   }
 
   public long makeAppointment(MakeAppointment command) {
-    var entity = mapper.toEntity(command);
-     return repository.save(entity).getId();
+     return repository.save(mapper.toEntity(command)).getId();
   }
 
-
-  public List<ResidentEntity> getResidents() {
-    return repository.findAll();
+  public List<ResidentProfile> getResidents() {
+    return repository.findAll().stream().map(mapper::fromEntity).collect(Collectors.toList());
   }
 }
